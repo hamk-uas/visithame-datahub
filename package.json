@@ -1,0 +1,24 @@
+{
+	"name": "visithame-datahub",
+	"version": "0.3.0",
+	"description": "Query products from DataHub",
+	"author": "VisitHäme",
+	"license": "CCBY4.0",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"start": "wp-scripts start",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^8.0.6",
+		"@wordpress/blocks": "^11.1.4",
+		"@wordpress/i18n": "^4.2.4"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^19.2.2"
+	}
+}

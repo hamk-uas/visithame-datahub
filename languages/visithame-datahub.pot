@@ -1,0 +1,71 @@
+# Copyright (C) 2021 VisitHäme
+# This file is distributed under the CCBY4.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: DataHub 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/datahub\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-09-08T14:52:18+03:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: visithame-datahub\n"
+
+#. Plugin Name of the plugin
+msgid "DataHub"
+msgstr ""
+
+#. Description of the plugin
+msgid "Query products from DataHub"
+msgstr ""
+
+#. Author of the plugin
+msgid "VisitHäme"
+msgstr ""
+
+#: class-product.php:98
+msgid "Pricing"
+msgstr ""
+
+#: class-product.php:108
+msgid "Opening hours"
+msgstr ""
+
+#: src/edit.js:149
+msgid "Categories"
+msgstr ""
+
+#: src/edit.js:158
+msgid "Municipalities"
+msgstr ""
+
+#: src/edit.js:167
+#: src/editor/LanguageSelectControl.js:15
+msgid "Language"
+msgstr ""
+
+#: src/edit.js:180
+msgid "DataHub – hello from the editor!"
+msgstr ""
+
+#: src/editor/MunicipalityCheckboxControl.js:34
+#: src/editor/TagCheckboxControl.js:19
+msgid "Search"
+msgstr ""
+
+#: src/save.js:28
+msgid "DataHub – hello from the saved content!"
+msgstr ""
+
+#: block.json
+msgctxt "block title"
+msgid "DataHub"
+msgstr ""
+
+#: block.json
+msgctxt "block description"
+msgid "Query products from DataHub"
+msgstr ""

@@ -1,0 +1,23 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-datahub-visithame-datahub {
+	border: 1px dotted #f00;
+}
+
+.CheckboxControl {
+	margin-bottom: 2px!important;
+	margin-left: 2px!important;
+}
+
+.CheckboxContainer {
+	max-height: 200px;
+	overflow: auto;
+}
+
+.SelectControl {
+	max-height: 60px;
+}

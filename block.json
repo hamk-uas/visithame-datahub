@@ -1,0 +1,34 @@
+{
+	"apiVersion": 2,
+	"name": "datahub/visithame-datahub",
+	"version": "0.1.0",
+	"title": "DataHub",
+	"category": "widgets",
+	"icon": "analytics",
+	"description": "Query products from DataHub",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "visithame-datahub",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css",
+	"attributes": {
+		"categories": {
+			"type": "string",
+			"default": "No selection"
+		},
+		"municipalities": {
+			"type": "string",
+			"default": "No selection"
+		},
+		"language": {
+			"type": "string",
+			"default": "fi"
+		},
+		"target_groups": {
+			"type": "string",
+			"default": "No selection"
+		}
+	}
+}
