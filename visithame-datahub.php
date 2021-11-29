@@ -7,7 +7,7 @@
  * Requires PHP:      7.0
  * Version:           0.3.0
  * Author:            VisitHäme
- * License:           CCBY4.0
+ * License:           MIT License
  * License URI:       https://creativecommons.org/licenses/by/4.0/
  * Text Domain:       visithame-datahub
  * Domain Path:       /languages
