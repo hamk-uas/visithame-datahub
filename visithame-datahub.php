@@ -8,7 +8,7 @@
  * Version:           0.3.0
  * Author:            VisitHäme
  * License:           MIT License
- * License URI:       https://creativecommons.org/licenses/by/4.0/
+ * License URI:       https://opensource.org/licenses/MIT
  * Text Domain:       visithame-datahub
  * Domain Path:       /languages
  *
