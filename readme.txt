@@ -4,7 +4,7 @@ Tags:              block
 Tested up to:      5.8.0
 Stable tag:        0.3.0
 License:           MIT License
-License URI:       https://creativecommons.org/licenses/by/4.0/
+License URI:       https://opensource.org/licenses/MIT
 
 Query products from DataHub
 
