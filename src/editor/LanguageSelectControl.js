@@ -5,18 +5,18 @@
  */
 import { __ } from '@wordpress/i18n';
 import { SelectControl } from '@wordpress/components';
-export const LanguageSelectControl = (props) => {
-    const { onChange, languages, value } = props;
+export const LanguageSelectControl = ( props ) => {
+	const { onChange, languages, value } = props;
 
-    return (
-        <>
-            <SelectControl
-                className="SelectControl"
-                label={__('Language', 'visithame-datahub')}
-                value={value}
-                onChange={onChange}
-                options={languages}
-            />
-        </>
-    )
-}
+	return (
+		<>
+			<SelectControl
+				className="SelectControl"
+				label={ __( 'Language', 'visithame-datahub' ) }
+				value={ value }
+				onChange={ onChange }
+				options={ languages }
+			/>
+		</>
+	);
+};

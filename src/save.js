@@ -24,11 +24,11 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function save() {
 	return (
-		<p {...useBlockProps.save()}>
-				{__(
-					'DataHub – hello from the saved content!',
-					'visithame-datahub'
-				)}
+		<p { ...useBlockProps.save() }>
+			{ __(
+				'DataHub – hello from the saved content!',
+				'visithame-datahub'
+			) }
 		</p>
 	);
 }

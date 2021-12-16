@@ -6,24 +6,26 @@
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl, TextControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-export const TargetGroupCheckboxControl = (props) => {
-    const { onChange, targetGroups } = props;
+export const TargetGroupCheckboxControl = ( props ) => {
+	const { onChange, targetGroups } = props;
 
-    return (
-        <>
-            <div className="CheckboxContainer">
-                {targetGroups.map((targetGroup) => {
-                    return (
-                        <CheckboxControl
-                            className="CheckboxControl"
-                            label={targetGroup.label}
-                            checked={targetGroup.checked}
-                            onChange={(event) => onChange(event, targetGroup.value)}
-                            key={targetGroup.value}
-                        />
-                    )
-                })}
-            </div>
-        </>
-    )
-}
+	return (
+		<>
+			<div className="CheckboxContainer">
+				{ targetGroups.map( ( targetGroup ) => {
+					return (
+						<CheckboxControl
+							className="CheckboxControl"
+							label={ targetGroup.label }
+							checked={ targetGroup.checked }
+							onChange={ ( event ) =>
+								onChange( event, targetGroup.value )
+							}
+							key={ targetGroup.value }
+						/>
+					);
+				} ) }
+			</div>
+		</>
+	);
+};

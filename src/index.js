@@ -35,5 +35,7 @@ registerBlockType( 'datahub/visithame-datahub', {
 	 * @see ./save.js
 	 */
 	// save,
-	save: () => { return null }
+	save: () => {
+		return null;
+	},
 } );

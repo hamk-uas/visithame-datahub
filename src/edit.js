@@ -36,169 +36,186 @@ import { useState, useEffect } from '@wordpress/element';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit({ attributes, setAttributes }) {
-	const languages = [{ value: "de", label: "Saksa", checked: false }, { value: "en", label: "Englanti", checked: false }, { value: "fi", label: "Suomi", checked: false }, { value: "ja", label: "Japani", checked: false }, { value: "ru", label: "Venäjä", checked: false }, { value: "sv", label: "Ruotsi", checked: false }, { value: "zh", label: "Kiina", checked: false }]
-	const targetGroupsList = [{ value: "b2b", label: "B2B", checked: false }, { value: "b2c", label: "B2C", checked: false }, { value: "group", label: "Group", checked: false }, { value: "individual", label: "Individual", checked: false }]
+export default function Edit( { attributes, setAttributes } ) {
+	const languages = [
+		{ value: 'de', label: 'Saksa', checked: false },
+		{ value: 'en', label: 'Englanti', checked: false },
+		{ value: 'fi', label: 'Suomi', checked: false },
+		{ value: 'ja', label: 'Japani', checked: false },
+		{ value: 'ru', label: 'Venäjä', checked: false },
+		{ value: 'sv', label: 'Ruotsi', checked: false },
+		{ value: 'zh', label: 'Kiina', checked: false },
+	];
+	const targetGroupsList = [
+		{ value: 'b2b', label: 'B2B', checked: false },
+		{ value: 'b2c', label: 'B2C', checked: false },
+		{ value: 'group', label: 'Group', checked: false },
+		{ value: 'individual', label: 'Individual', checked: false },
+	];
 
-	const [tags, setTags] = useState(searchParams.tags)
-	const [municipalities, setMunicipalities] = useState(searchParams.municipalities)
-	const [language, setLanguage] = useState(languages)
-	const [targetGroups, setTargetGroups] = useState(targetGroupsList)
+	const [ tags, setTags ] = useState( searchParams.tags );
+	const [ municipalities, setMunicipalities ] = useState(
+		searchParams.municipalities
+	);
+	const [ language, setLanguage ] = useState( languages );
+	const [ targetGroups, setTargetGroups ] = useState( targetGroupsList );
 
-	const handleTagChange = (event, name) => {
-		let updatedTags = [...tags];
+	const handleTagChange = ( event, name ) => {
+		let updatedTags = [ ...tags ];
 
-		for (let i in updatedTags) {
-			if (updatedTags[i].tag == name) {
-				updatedTags[i].checked = event;
+		for ( let i in updatedTags ) {
+			if ( updatedTags[ i ].tag == name ) {
+				updatedTags[ i ].checked = event;
 				break;
 			}
 		}
 
-		setTags(updatedTags)
+		setTags( updatedTags );
 
 		let usedCategories = [];
-		for (let i in updatedTags) {
-			if (updatedTags[i].checked == true) {
-				usedCategories.push(updatedTags[i].tag)
+		for ( let i in updatedTags ) {
+			if ( updatedTags[ i ].checked == true ) {
+				usedCategories.push( updatedTags[ i ].tag );
 			}
 		}
 		const cats = usedCategories.join();
-		setAttributes({ categories: cats })
-	}
+		setAttributes( { categories: cats } );
+	};
 
-	const handleMunicipalityChange = (event, city, cityCode) => {
-		let updatedMunicipalities = [...municipalities];
+	const handleMunicipalityChange = ( event, city, cityCode ) => {
+		let updatedMunicipalities = [ ...municipalities ];
 
-		for (let i in updatedMunicipalities) {
-			if (updatedMunicipalities[i].city_code == cityCode && updatedMunicipalities[i].city == city) {
-				updatedMunicipalities[i].checked = event;
+		for ( let i in updatedMunicipalities ) {
+			if (
+				updatedMunicipalities[ i ].city_code == cityCode &&
+				updatedMunicipalities[ i ].city == city
+			) {
+				updatedMunicipalities[ i ].checked = event;
 				break;
 			}
 		}
 
-		setMunicipalities(updatedMunicipalities)
+		setMunicipalities( updatedMunicipalities );
 
 		let usedMunicipalities = [];
-		for (let i in updatedMunicipalities) {
-			if (updatedMunicipalities[i].checked == true) {
-				usedMunicipalities.push(updatedMunicipalities[i].city_code)
+		for ( let i in updatedMunicipalities ) {
+			if ( updatedMunicipalities[ i ].checked == true ) {
+				usedMunicipalities.push( updatedMunicipalities[ i ].city_code );
 			}
 		}
 		const cities = usedMunicipalities.join();
-		setAttributes({ municipalities: cities })
-	}
+		setAttributes( { municipalities: cities } );
+	};
 
-	const handleLanguageChange = (event) => {
-		let updatedLanguage = [...language];
+	const handleLanguageChange = ( event ) => {
+		let updatedLanguage = [ ...language ];
 
-		for (let i in updatedLanguage) {
-			if (updatedLanguage[i].value == event) {
-				updatedLanguage[i].checked = true;
+		for ( let i in updatedLanguage ) {
+			if ( updatedLanguage[ i ].value == event ) {
+				updatedLanguage[ i ].checked = true;
 			} else {
-				updatedLanguage[i].checked = false;
+				updatedLanguage[ i ].checked = false;
 			}
 		}
 
-		setLanguage(updatedLanguage)
-		setAttributes({ language: event })
-	}
+		setLanguage( updatedLanguage );
+		setAttributes( { language: event } );
+	};
 
-	const handleTargetGroupChange = (event, value) => {
-		let updatedTargetGroups = [...targetGroups];
+	const handleTargetGroupChange = ( event, value ) => {
+		let updatedTargetGroups = [ ...targetGroups ];
 
-		for (let i in updatedTargetGroups) {
-			if (updatedTargetGroups[i].value == value) {
-				updatedTargetGroups[i].checked = event
+		for ( let i in updatedTargetGroups ) {
+			if ( updatedTargetGroups[ i ].value == value ) {
+				updatedTargetGroups[ i ].checked = event;
 				break;
 			}
 		}
 
-		setTargetGroups(updatedTargetGroups);
+		setTargetGroups( updatedTargetGroups );
 		let targets = [];
-		for (let i in updatedTargetGroups) {
-			if (updatedTargetGroups[i].checked == true) {
-				targets.push(updatedTargetGroups[i].value)
+		for ( let i in updatedTargetGroups ) {
+			if ( updatedTargetGroups[ i ].checked == true ) {
+				targets.push( updatedTargetGroups[ i ].value );
 			}
 		}
 		const targetsFinal = targets.join();
-		setAttributes({ target_groups: targetsFinal })
-	}
+		setAttributes( { target_groups: targetsFinal } );
+	};
 
-	useEffect(() => {
-		let usedTags = attributes.categories.split(",");
+	useEffect( () => {
+		let usedTags = attributes.categories.split( ',' );
 
-		usedTags.forEach(tag => {
-			tags.find((o, i) => {
-				if (tag === o.tag) {
+		usedTags.forEach( ( tag ) => {
+			tags.find( ( o, i ) => {
+				if ( tag === o.tag ) {
 					o.checked = true;
 					return true;
 				}
-			})
-		})
+			} );
+		} );
 
-		let usedMunicipalities = attributes.municipalities.split(",");
+		let usedMunicipalities = attributes.municipalities.split( ',' );
 
-		usedMunicipalities.forEach(municipality => {
-			municipalities.find(o => {
-				if (municipality === o.city_code) {
+		usedMunicipalities.forEach( ( municipality ) => {
+			municipalities.find( ( o ) => {
+				if ( municipality === o.city_code ) {
 					o.checked = true;
 					return true;
 				}
-			})
-		})
+			} );
+		} );
 
 		let usedLanguage = attributes.language;
-		language.find(o => {
-			if (usedLanguage == o.value) {
+		language.find( ( o ) => {
+			if ( usedLanguage == o.value ) {
 				o.checked = true;
 				return true;
 			}
-		})
+		} );
 
-		let usedTargets = attributes.target_groups.split(",");
-		usedTargets.forEach(target => {
-			targetGroups.find(o => {
-				if (target === o.value) {
+		let usedTargets = attributes.target_groups.split( ',' );
+		usedTargets.forEach( ( target ) => {
+			targetGroups.find( ( o ) => {
+				if ( target === o.value ) {
 					o.checked = true;
 					return true;
 				}
-			})
-		})
-
-	}, [])
+			} );
+		} );
+	}, [] );
 
 	return (
-		<div {...useBlockProps()}>
+		<div { ...useBlockProps() }>
 			{
 				<InspectorControls key="setting">
 					<div id="visithame-datahub-controls">
 						<fieldset>
 							<legend className="blocks-base-control__label">
-								{__('Categories', 'visithame-datahub')}
+								{ __( 'Categories', 'visithame-datahub' ) }
 							</legend>
 							<TagCheckboxControl
-								tags={tags}
-								onChange={handleTagChange}
+								tags={ tags }
+								onChange={ handleTagChange }
 							/>
 						</fieldset>
 						<fieldset>
 							<legend className="blocks-base-control__label">
-								{__('Municipalities', 'visithame-datahub')}
+								{ __( 'Municipalities', 'visithame-datahub' ) }
 							</legend>
 							<MunicipalityCheckboxControl
-								municipalities={municipalities}
-								onChange={handleMunicipalityChange}
+								municipalities={ municipalities }
+								onChange={ handleMunicipalityChange }
 							/>
 						</fieldset>
 						<fieldset>
 							<legend className="blocks-base-control__label">
-								{__('Language', 'visithame-datahub')}
+								{ __( 'Language', 'visithame-datahub' ) }
 							</legend>
 							<LanguageSelectControl
-								languages={language}
-								value={attributes.language}
-								onChange={handleLanguageChange}
+								languages={ language }
+								value={ attributes.language }
+								onChange={ handleLanguageChange }
 							/>
 						</fieldset>
 						<fieldset>
@@ -206,18 +223,20 @@ export default function Edit({ attributes, setAttributes }) {
 								Target group
 							</legend>
 							<TargetGroupCheckboxControl
-								targetGroups={targetGroups}
+								targetGroups={ targetGroups }
 								// value={attributes.target_groups}
-								onChange={handleTargetGroupChange}
+								onChange={ handleTargetGroupChange }
 							/>
 						</fieldset>
 					</div>
-
 				</InspectorControls>
 			}
 			<div>
-				{__('DataHub – hello from the editor!', 'visithame-datahub')}<br />
-
+				{ __(
+					'DataHub – hello from the editor!',
+					'visithame-datahub'
+				) }
+				<br />
 			</div>
 		</div>
 	);
