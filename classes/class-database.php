@@ -93,6 +93,22 @@ class DataHubDatabase
         return $municipalities;
     }
 
+    function get_municipality($city_code) {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'visithame_datahub_municipalities';
+        $municipality = $wpdb->get_results("
+        SELECT city
+        FROM $table_name
+        WHERE city_code = $city_code
+        ");
+
+        if (count($municipality) > 0) {
+            return $municipality[0]->city;
+        } else {
+            return "Kanta-Häme";
+        }
+    }
+
     function insert_or_update_products($products)
     {
         $table_product = array();

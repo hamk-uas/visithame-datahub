@@ -37,6 +37,8 @@ class Product
 
     function __construct($product)
     {
+        global $wpdb;
+        $database = new DataHubDatabase();
         $this->product = $product;
 
         $cover_photo = null;
@@ -65,7 +67,7 @@ class Product
         $this->social_media = $this->deconstruct_object(array('link_type', 'url'), $product->SocialData);
         $this->webshop_link = $product->webshop_url;
         $this->product_accessibility = $product->accessible_product;
-        $this->product_address_city = $product->city;
+        $this->product_address_city = $database->get_municipality($product->city_code);
         $this->product_address_latitude = $product->latitude;
         $this->product_address_longitude = $product->longitude;
         $this->product_address_postal_area = $product->postal_area;
