@@ -108,12 +108,10 @@ class Product
         $content .= '<div class="datahub__title_links">';
 
         if ($this->product_link != null && $this->product_link != '-' && $this->product_link != 'http://-') {
-            // $content .= '<span class="material-icons">link</span>';
             $content .= '<a class="datahub__icon_link" href="' . $this->product_link . '">' . '<svg class="datahub__icon icon-link"><use xlink:href="#icon-link"></use></svg>' . '<div class="datahub__link_text">WWW</div></a>'; //'<span class="material-icons datahub__icon ">link</span>'
         }
 
         if ($this->webshop_link != null) {
-            // $content .= '<span class="material-icons">payments</span>';
             $content .= '<a class="datahub__icon_link" href="' . $this->webshop_link . '">' . '<svg class="datahub__icon icon-cart"><use xlink:href="#icon-cart"></use></svg>' . '<div class="datahub__link_text">' . $this->translations_for_product($this->product_language, 'store') . '</div></a>'; //'<span class="material-icons datahub__icon ">payments</span>'
         }
 
@@ -139,7 +137,6 @@ class Product
         $svg = null;
         switch ($link->link_type) {
             case "facebook":
-                // $url = $product->product_url_fi;
                 $svg = '<svg class="datahub__icon  icon-facebook2"><use xlink:href="#icon-facebook2"></use></svg>';
                 break;
             case "instagram":
@@ -222,9 +219,8 @@ class Product
         $content .= '<li class="datahub__sidebar_li">';
         $content .= '<span class="material-icons">map</span>';
         $content .= '<span><a href="https://google.com/maps/?q=' . $address . '" target="blank">Google Maps</a></span></li>';
-        //<svg alt="Avaa Google Mapsissa" title="Avaa Google Mapsissa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 185.3"><style>.a{fill:#4285F4;}.b{fill:#EA4335;}</style><g transform="translate(-283.51 -410.44)matrix(4.2191 0 0 4.2191 -384.03 -1510.8)" fill="#63666A"><path d="m304.2 489v-28.6h3.7l10 17.4h0.2l10-17.4h3.7v28.6h-3.7v-17l0.2-4.8h-0.2l-9 15.7h-2.2l-9-15.7h-0.2l0.2 4.8v17z"/> <path d="m343 489.6c-2.1 0-3.8-0.6-5.2-1.8-1.4-1.2-2.1-2.8-2.1-4.8 0-2.1 0.8-3.8 2.5-5 1.7-1.2 3.7-1.8 6.1-1.8 2.2 0 3.9 0.4 5.3 1.2v-0.6c0-1.4-0.5-2.6-1.5-3.5-1-0.9-2.2-1.3-3.6-1.3-1.1 0-2 0.3-2.9 0.8-0.9 0.5-1.5 1.2-1.8 2.1l-3.4-1.4c0.5-1.2 1.3-2.3 2.7-3.3 1.3-1 3.1-1.5 5.3-1.5 2.5 0 4.6 0.7 6.2 2.2 1.7 1.5 2.5 3.5 2.5 6.2v11.8h-3.5v-2.7h-0.2c-1.5 2.2-3.6 3.4-6.4 3.4zm0.6-3.4c1.5 0 2.9-0.6 4.1-1.7 1.2-1.1 1.9-2.5 1.9-4-1-0.9-2.6-1.3-4.7-1.3-1.8 0-3.1 0.4-4 1.2-0.9 0.8-1.4 1.7-1.4 2.7 0 1 0.4 1.7 1.2 2.3 0.8 0.6 1.8 0.8 2.8 0.8z"/><path d="m367.4 489.6c-1.5 0-2.8-0.3-4-1-1.2-0.6-2.1-1.4-2.7-2.4h-0.2l0.2 2.7v8.6h-3.7v-28.2h3.5v2.7h0.2c0.6-1 1.5-1.8 2.7-2.4 1.2-0.6 2.5-1 4-1 2.5 0 4.7 1 6.6 3 1.8 2 2.8 4.5 2.8 7.4 0 3-0.9 5.4-2.8 7.4-1.8 2-4 3-6.6 3zm-0.6-3.4c1.7 0 3.2-0.6 4.4-1.9 1.2-1.3 1.8-3 1.8-5.1 0-2.1-0.6-3.8-1.8-5.1-1.2-1.3-2.7-1.9-4.4-1.9-1.7 0-3.2 0.6-4.4 1.9-1.2 1.3-1.8 3-1.8 5.2 0 2.2 0.6 3.9 1.8 5.2 1.2 1.3 2.7 1.9 4.4 1.9z"/><path d="m387.4 489.6c-2.2 0-4-0.5-5.4-1.6-1.4-1.1-2.5-2.4-3.1-4l3.3-1.4c1 2.5 2.8 3.7 5.3 3.7 1.1 0 2.1-0.3 2.8-0.8 0.7-0.5 1.1-1.2 1.1-2 0-1.3-0.9-2.1-2.7-2.6l-4-1c-1.3-0.3-2.4-0.9-3.6-1.8-1.1-0.9-1.7-2.1-1.7-3.6 0-1.7 0.8-3.1 2.3-4.2 1.5-1.1 3.4-1.6 5.5-1.6 1.7 0 3.3 0.4 4.6 1.2 1.4 0.8 2.3 1.9 2.9 3.4l-3.2 1.3c-0.7-1.7-2.2-2.6-4.5-2.6-1.1 0-2 0.2-2.8 0.7-0.7 0.5-1.1 1.1-1.1 1.8 0 1.1 0.9 1.9 2.6 2.3l3.9 0.9c1.8 0.4 3.2 1.2 4.1 2.2 0.9 1 1.3 2.2 1.3 3.5 0 1.8-0.7 3.2-2.2 4.4-1.4 1.2-3.3 1.8-5.6 1.8z"/></g><g transform="translate(-283.51 -410.44)matrix(7.6936 0 0 7.6936 -2331.8 -2373.8)"><path d="m358 370.4h-8.5v2.5h6c-0.3 3.5-3.3 5.1-6 5.1-3.6 0-6.7-2.8-6.7-6.7 0-3.8 3-6.8 6.7-6.8 2.9 0 4.6 1.8 4.6 1.8l1.8-1.8s-2.3-2.5-6.4-2.5c-5.3 0-9.4 4.5-9.4 9.3 0 4.7 3.8 9.3 9.5 9.3 5 0 8.6-3.4 8.6-8.4 0-1.1-0.2-1.7-0.2-1.7z" class="a"/><path d="m365 368.6c-3.5 0-6 2.7-6 5.9 0 3.2 2.4 6 6 6 3.3 0 6-2.5 6-6 0-4-3.1-6-6-6zm0 2.3c1.7 0 3.4 1.4 3.4 3.6 0 2.2-1.6 3.6-3.4 3.6-1.9 0-3.4-1.5-3.4-3.6 0-2.1 1.5-3.6 3.4-3.6z" class="b"/><path d="m378 368.6c-3.5 0-6 2.7-6 5.9 0 3.2 2.4 6 6 6 3.3 0 6-2.5 6-6 0-4-3.1-6-6-6zm0 2.3c1.7 0 3.4 1.4 3.4 3.6 0 2.2-1.6 3.6-3.4 3.6-1.9 0-3.4-1.5-3.4-3.6 0-2.1 1.5-3.6 3.4-3.6z" fill="#FBBC05"/><path d="m390.8 368.6c-3.2 0-5.7 2.8-5.7 6 0 3.6 2.9 6 5.7 6 1.7 0 2.6-0.7 3.3-1.5v1.2c0 2.1-1.3 3.3-3.1 3.3-1.8 0-2.7-1.4-3.1-2.1l-2.3 1c0.8 1.7 2.5 3.5 5.4 3.5 3.2 0 5.6-2 5.6-6.2v-10.7h-2.5v1c-0.8-0.8-1.8-1.4-3.2-1.4zm0.2 2.3c1.6 0 3.2 1.3 3.2 3.6 0 2.3-1.6 3.6-3.2 3.6-1.7 0-3.3-1.4-3.3-3.6 0-2.3 1.7-3.7 3.3-3.7z" class="a"/><path d="m407.7 368.6c-3 0-5.6 2.4-5.6 6 0 3.8 2.8 6 5.9 6 2.5 0 4.1-1.4 5-2.6l-2.1-1.4c-0.5 0.8-1.4 1.6-2.9 1.6-1.7 0-2.5-0.9-2.9-1.8l8-3.3-0.4-1c-0.8-1.9-2.6-3.5-5-3.5zm0.1 2.3c1.1 0 1.9 0.6 2.2 1.3l-5.3 2.2c-0.2-1.7 1.4-3.5 3.1-3.5z" class="b"/><path d="m398.3 380.2h2.6v-17.6h-2.6z" fill="#34A853"/></g></svg></span></a></span></li>';
 
-
+        # Price and open information hidden
         # [0] => Array ( [open_from] => 00:00:00 [open_to] => 00:00:00 [weekday] => friday
         // $ar_time =  $this->product_opening_hours;
         // $order = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
@@ -308,14 +304,7 @@ class Product
             $content .= '<span><table><tr><td>' . $this->translations_for_product($this->product_language, 'open_all_year') . '</td></tr></table></span>';
         }
         $content .= '</li>';
-
-
         $content .= '</ul>';
-        //  $content .= $this->product_address_postal_area;
-        // $content .= $this->product_address_city;
-        /*$content .= '  <li id="companyHours">'; 
-        $content .= '<span class="material-icons">access_time_filled</span>';
-        $content .= '<span><a href=' . $this->product_opening_hours . ' target="_blank">' .   $this->product_opening_hours    . '</a></span></li>';*/
         $content .= '</div>'; // .datahub__sidebar_column
 
         return $content;
