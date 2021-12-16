@@ -5,7 +5,7 @@
  * Description:       Query products from DataHub
  * Requires at least: 5.8
  * Requires PHP:      7.0
- * Version:           0.3.0
+ * Version:           0.4.0
  * Author:            VisitHäme
  * License:           MIT License
  * License URI:       https://opensource.org/licenses/MIT
@@ -198,56 +198,9 @@ class VisitHameDataHub
                 'page_template'  => 'product-template.php'
             )
         );
-        // }
-
-        // // if (empty($check_page_exist)) {
-        // $page_id_de = wp_insert_post(
-        //     array(
-        //         'comment_status' => 'close',
-        //         'ping_status'    => 'close',
-        //         'post_author'    => 1,
-        //         'post_title'     => ucwords('Product - German'),
-        //         'post_name'      => sanitize_title('product_german'),
-        //         'post_status'    => 'publish',
-        //         'post_content'   => 'German product content',
-        //         'post_type'      => 'page',
-        //         'page_template'  => 'product-template.php'
-        //     )
-        // );
-        // // }
-        // // if (empty($check_page_exist)) {
-        // $page_id_fi = wp_insert_post(
-        //     array(
-        //         'comment_status' => 'close',
-        //         'ping_status'    => 'close',
-        //         'post_author'    => 1,
-        //         'post_title'     => ucwords('Product - Finnish'),
-        //         'post_name'      => sanitize_title('product_finnish'),
-        //         'post_status'    => 'publish',
-        //         'post_content'   => 'Finnish product content',
-        //         'post_type'      => 'page',
-        //         'page_template'  => 'product-template.php'
-        //     )
-        // );
-        // }
-
 
         $database = new DataHubDatabase();
         $database->insert_page($page_id);
-
-        //         $PageGuid = site_url() . "/my-page-req1";
-        // $my_post  = array( 'post_title'     => 'My page Reql',
-        //                    'post_type'      => 'page',
-        //                    'post_name'      => 'my-page',
-        //                    'post_content'   => 'This is my page reql.',
-        //                    'post_status'    => 'publish',
-        //                    'comment_status' => 'closed',
-        //                    'ping_status'    => 'closed',
-        //                    'post_author'    => 1,
-        //                    'menu_order'     => 0,
-        //                    'guid'           => $PageGuid );
-
-        // $PageID = wp_insert_post( $my_post, FALSE ); // Get Post ID - FALSE to return 0 instead of wp_error.
     }
 
     function deactivate()
@@ -259,8 +212,6 @@ class VisitHameDataHub
         $pages = $wpdb->get_results($sql);
 
         wp_delete_post($pages[0]->page_id, true);
-        // wp_delete_post( int $postid, bool $force_delete = false )
-        $database = null;
 
         $table_prefix = $wpdb->prefix;
         $tables = array(
@@ -293,14 +244,14 @@ class VisitHameDataHub
         }
 
         delete_option('datahub_option_name');
-        // $options = get_option('datahub_option_name');
-        // if (empty($options['client_secret_0']) || empty($options['username_1']) || empty($options['password_2'])) {
     }
+
     function datahub_rewrite_tag()
     {
         add_rewrite_tag('%product%', '([^&]+)');
         add_rewrite_tag('%language%', '([^&]{2})');
     }
+
     function datahub_product_rewrite_rule()
     {
         $database = new DataHubDatabase();
@@ -314,15 +265,9 @@ class VisitHameDataHub
         add_rewrite_rule('^продукты/([^/]*)/([^/]{2})/?', sprintf('index.php?page_id=%s&product=$matches[1]&language=$matches[2]', $pages[0]->page_id), 'top'); // Ru
         add_rewrite_rule('^产品/([^/]*)/([^/]{2})/?', sprintf('index.php?page_id=%s&product=$matches[1]&language=$matches[2]', $pages[0]->page_id), 'top'); // Zh
         add_rewrite_rule('^produkter/([^/]*)/([^/]{2})/?', sprintf('index.php?page_id=%s&product=$matches[1]&language=$matches[2]', $pages[0]->page_id), 'top'); // Sv
-        // add_rewrite_rule('^products/([^/]*)/([^/]{2})/?', sprintf('index.php?page_id=%s&product=$matches[1]&language=$matches[2]', $pages[0]->page_en), 'top');
-        // add_rewrite_rule('^produkte/([^/]*)/([^/]{2})/?', sprintf('index.php?page_id=%s&product=$matches[1]&language=$matches[2]', $pages[0]->page_de), 'top');
 
         flush_rewrite_rules();
     }
-
-
-    // add_action('init', 'datahub_rewrite_tag', 10, 0);
-    // add_action('init', 'datahub_product_rewrite_rule', 10, 0);
 
     function register_styles()
     {
@@ -330,7 +275,6 @@ class VisitHameDataHub
         wp_enqueue_style('prefix-style');
         wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/icon?family=Material+Icons');
     }
-    // add_action('wp_enqueue_scripts', 'datahub_callback_set_up_scripts');
 
     function content_enqueue()
     {
@@ -339,7 +283,6 @@ class VisitHameDataHub
             plugins_url('tabs.js', __FILE__)
         );
     }
-    // add_action('wp_enqueue_scripts', 'content_enqueue');
 
     function datahub_query($attributes)
     {
@@ -375,7 +318,6 @@ class VisitHameDataHub
         }
 
         $products = $database->get_products_list($attributes['categories'], $attributes['municipalities'], $attributes['language']);
-        // echo microtime(true) - $start . ' done done in<br>';
         $content = '';
 
         // Hämeenlinna  109
