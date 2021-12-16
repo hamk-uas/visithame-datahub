@@ -2,7 +2,7 @@
 Contributors:      VisitHäme
 Tags:              block
 Tested up to:      5.8.0
-Stable tag:        0.3.0
+Stable tag:        0.4.0
 License:           MIT License
 License URI:       https://opensource.org/licenses/MIT
 
