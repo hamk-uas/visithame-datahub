@@ -1,10 +1,14 @@
 {
 	"name": "visithame-datahub",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"description": "Query products from DataHub",
 	"author": "VisitHäme",
-	"license": "CCBY4.0",
+	"license": "MIT",
 	"main": "build/index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/hamk-uas/visithame-datahub.git"
+	},
 	"scripts": {
 		"build": "wp-scripts build",
 		"format": "wp-scripts format",
@@ -14,7 +18,7 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^8.0.6",
+		"@wordpress/block-editor": "^8.0.11",
 		"@wordpress/blocks": "^11.1.4",
 		"@wordpress/i18n": "^4.2.4"
 	},
