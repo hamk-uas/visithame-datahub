@@ -10,16 +10,16 @@ function datahub_render_card($product, $language)
     $url = str_replace('(', '%28', $url);
     $url = str_replace(')', '%29', $url);
 
-    $content .= '<div class="datahub__container_card" style="background-image: url(' . $url . ');" ' . 'data-copyright="&copy; ' . $product->copyright . '" alt="' . $product->alt_text . '">';
+    $content .= '<div class="datahub-container-card" style="background-image: url(' . $url . ');" ' . 'data-copyright="&copy; ' . $product->copyright . '" alt="' . $product->alt_text . '">';
     $content .= sprintf("<a href='" . site_url('', 'relative') . "/%s/%s/' target='_blank'>", get_url($product, $language), $language);
-    $content .= '<div class="datahub__container_card_overlay">';
-    $content .= '<div class="datahub__container_card_title">' . mb_strtoupper($product->name) . '</div>';
-    $content .= '<div class="datahub__container_card_description">' . mb_substr($product->description, 0, 165) . '...</div>';
-    // $content .= '<div class="datahub__container_card_description">' . strtok($product->description, '.') . '...</div>';
+    $content .= '<div class="datahub-container-card-overlay">';
+    $content .= '<div class="datahub-container-card-title">' . mb_strtoupper($product->name) . '</div>';
+    $content .= '<div class="datahub-container-card-description">' . mb_substr($product->description, 0, 165) . '...</div>';
+    // $content .= '<div class="datahub-container-card-description">' . strtok($product->description, '.') . '...</div>';
     // $content .= '<div><small>' . $product->copyright . '</small></div>';
-    $content .= '</div>'; // .datahub__container_card_overlay
+    $content .= '</div>'; // .datahub-container-card-overlay
     $content .= '</a>'; // a
-    $content .= '</div>'; // .datahub__container_card
+    $content .= '</div>'; // .datahub-container-card
 
     return $content;
 }
@@ -29,8 +29,8 @@ function datahub_render_cards($products, $areas, $language, $target_groups)
     $content = '';
 
     foreach ($areas as $area) {
-        $content .= sprintf('<div id="%s" class="tabcontent">', $area['id']);
-        $content .= '<div class="datahub__container__cards">';
+        $content .= sprintf('<div id="%s" class="datahub-region-tabcontent">', $area['id']);
+        $content .= '<div class="datahub-container-cards">';
         foreach ($products as $product) {
             if ($target_groups != 'b2b') {
 
@@ -67,9 +67,9 @@ function datahub_render_cards($products, $areas, $language, $target_groups)
         $content .= '</div>';
     }
 
-    $pos = strpos($content, 'tabcontent');
+    $pos = strpos($content, 'datahub-region-tabcontent');
     if ($pos !== false) {
-        $content = substr_replace($content, 'tabcontent" style="display: block;', $pos, strlen('tabcontent'));
+        $content = substr_replace($content, 'datahub-region-tabcontent" style="display: block;', $pos, strlen('datahub-region-tabcontent'));
     }
     return $content;
 }

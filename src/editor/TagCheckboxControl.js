@@ -22,11 +22,11 @@ export const TagCheckboxControl = ( props ) => {
 				value={ category }
 				onChange={ ( value ) => setCategory( value ) }
 			/>
-			<div className="CheckboxContainer">
+			<div className="checkbox-container">
 				{ filteredTags.map( ( tag ) => {
 					return (
 						<CheckboxControl
-							className="CheckboxControl"
+							className="checkbox-control"
 							label={ tag.tag }
 							checked={ tag.checked }
 							onChange={ ( event ) => onChange( event, tag.tag ) }

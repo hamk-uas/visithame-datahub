@@ -2,8 +2,8 @@ function openArea( evt, areaName ) {
 	// Declare all variables
 	let i, tabcontent, tablinks;
 
-	// Get all elements with class="tabcontent" and hide them
-	tabcontent = document.getElementsByClassName( 'tabcontent' );
+	// Get all elements with class="datahub-region-tabcontent" and hide them
+	tabcontent = document.getElementsByClassName( 'datahub-region-tabcontent' );
 	for ( i = 0; i < tabcontent.length; i++ ) {
 		tabcontent[ i ].style.display = 'none';
 	}

@@ -271,7 +271,7 @@ class VisitHameDataHub
 
     function register_styles()
     {
-        wp_register_style('prefix-style', plugins_url('src/card.css', __FILE__));
+        // wp_register_style('prefix-style', plugins_url('src/card.css', __FILE__));
         wp_enqueue_style('prefix-style');
         wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/icon?family=Material+Icons');
     }
@@ -383,7 +383,7 @@ class VisitHameDataHub
         }
 
 
-        $content .= '<div class="tab">' . $buttons . '</div>';
+        $content .= '<div class="datahub-region-tab">' . $buttons . '</div>';
         $content .= datahub_render_cards($products, $areas, $attributes['language'], $attributes['target_groups']);
 
         return $content;

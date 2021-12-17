@@ -20,11 +20,11 @@ export const MunicipalityCheckboxControl = ( props ) => {
 				value={ searchValue }
 				onChange={ ( value ) => setSearchValue( value ) }
 			/>
-			<div className="CheckboxContainer">
+			<div className="checkbox-container">
 				{ filteredMunicipalities.map( ( municipality ) => {
 					return (
 						<CheckboxControl
-							className="CheckboxControl"
+							className="checkbox-control"
 							label={ municipality.city }
 							checked={ municipality.checked }
 							onChange={ ( event ) =>

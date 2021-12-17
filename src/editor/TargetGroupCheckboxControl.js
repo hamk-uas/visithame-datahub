@@ -5,17 +5,17 @@
  */
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl, TextControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+
 export const TargetGroupCheckboxControl = ( props ) => {
 	const { onChange, targetGroups } = props;
 
 	return (
 		<>
-			<div className="CheckboxContainer">
+			<div className="checkbox-container">
 				{ targetGroups.map( ( targetGroup ) => {
 					return (
 						<CheckboxControl
-							className="CheckboxControl"
+							className="checkbox-control"
 							label={ targetGroup.label }
 							checked={ targetGroup.checked }
 							onChange={ ( event ) =>

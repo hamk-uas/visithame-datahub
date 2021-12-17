@@ -103,30 +103,30 @@ class Product
 
         $content = '';
         $content .= '<div class="datahub__title_column" style="flex: 100%;">';
-        $content .= '<div class="datahub__title_image" style="background-image: url(' . $url . ');" ' . 'data-copyright="&copy; ' . $this->cover_image_copyright   . '"' . 'alt="' . $this->cover_image_alt . '">';
-        $content .= sprintf('<h2 class="datahub__title_text">%s</h2>', $this->product_name);
-        $content .= '<div class="datahub__title_links">';
+        $content .= '<div class="datahub-title-image" style="background-image: url(' . $url . ');" ' . 'data-copyright="&copy; ' . $this->cover_image_copyright   . '"' . 'alt="' . $this->cover_image_alt . '">';
+        $content .= sprintf('<h2 class="datahub-title-text">%s</h2>', $this->product_name);
+        $content .= '<div class="datahub-title-links">';
 
         if ($this->product_link != null && $this->product_link != '-' && $this->product_link != 'http://-') {
-            $content .= '<a class="datahub__icon_link" href="' . $this->product_link . '">' . '<svg class="datahub__icon icon-link"><use xlink:href="#icon-link"></use></svg>' . '<div class="datahub__link_text">WWW</div></a>'; //'<span class="material-icons datahub__icon ">link</span>'
+            $content .= '<a class="datahub-icon-link" href="' . $this->product_link . '">' . '<svg class="datahub-icon icon-link"><use xlink:href="#icon-link"></use></svg>' . '<div class="datahub-link-text">WWW</div></a>'; //'<span class="material-icons datahub-icon ">link</span>'
         }
 
         if ($this->webshop_link != null) {
-            $content .= '<a class="datahub__icon_link" href="' . $this->webshop_link . '">' . '<svg class="datahub__icon icon-cart"><use xlink:href="#icon-cart"></use></svg>' . '<div class="datahub__link_text">' . $this->translations_for_product($this->product_language, 'store') . '</div></a>'; //'<span class="material-icons datahub__icon ">payments</span>'
+            $content .= '<a class="datahub-icon-link" href="' . $this->webshop_link . '">' . '<svg class="datahub-icon icon-cart"><use xlink:href="#icon-cart"></use></svg>' . '<div class="datahub-link-text">' . $this->translations_for_product($this->product_language, 'store') . '</div></a>'; //'<span class="material-icons datahub-icon ">payments</span>'
         }
 
         if ($this->social_media != null) {
             foreach ($this->social_media as $social_link) {
                 if ($social_link != null) {
                     if ($social_link->url != 'http://-' && $social_link->url != null) {
-                        $content .= sprintf('<a class="datahub__icon_link" title="%s" href="%s">' . $this->check_link($social_link) . '<div class="datahub__link_text">%s</div></a>', $social_link->link_type, $social_link->url, $social_link->link_type);
+                        $content .= sprintf('<a class="datahub-icon-link" title="%s" href="%s">' . $this->check_link($social_link) . '<div class="datahub-link-text">%s</div></a>', $social_link->link_type, $social_link->url, $social_link->link_type);
                     }
                 }
             }
         }
 
-        $content .= '</div>'; // .datahub__title_links
-        $content .= '</div>'; // .datahub__title_image
+        $content .= '</div>'; // .datahub-title-links
+        $content .= '</div>'; // .datahub-title-image
         $content .= '</div>'; // .datahub__title_column
 
         return $content;
@@ -137,22 +137,22 @@ class Product
         $svg = null;
         switch ($link->link_type) {
             case "facebook":
-                $svg = '<svg class="datahub__icon  icon-facebook2"><use xlink:href="#icon-facebook2"></use></svg>';
+                $svg = '<svg class="datahub-icon  icon-facebook2"><use xlink:href="#icon-facebook2"></use></svg>';
                 break;
             case "instagram":
-                $svg = '<svg class="datahub__icon  icon-instagram"><use xlink:href="#icon-instagram"></use></svg>';
+                $svg = '<svg class="datahub-icon  icon-instagram"><use xlink:href="#icon-instagram"></use></svg>';
                 break;
             case "weibo":
-                $svg = '<svg class="datahub__icon  icon-sina-weibo"><use xlink:href="#icon-sina-weibo"></use></svg>';
+                $svg = '<svg class="datahub-icon  icon-sina-weibo"><use xlink:href="#icon-sina-weibo"></use></svg>';
                 break;
             case "youtube":
-                $svg = '<svg class="datahub__icon  icon-youtube"><use xlink:href="#icon-youtube"></use></svg>';
+                $svg = '<svg class="datahub-icon  icon-youtube"><use xlink:href="#icon-youtube"></use></svg>';
                 break;
             case "vkontakte":
-                $svg = '<svg class="datahub__icon  icon-vkontakte"><use xlink:href="#icon-vkontakte"></use></svg>';
+                $svg = '<svg class="datahub-icon  icon-vkontakte"><use xlink:href="#icon-vkontakte"></use></svg>';
                 break;
             case "twitter":
-                $svg = '<svg class="datahub__icon  icon-twitter"><use xlink:href="#icon-twitter"></use></svg>';
+                $svg = '<svg class="datahub-icon  icon-twitter"><use xlink:href="#icon-twitter"></use></svg>';
                 break;
             default:
                 $svg = '<svg></svg>';
@@ -164,14 +164,14 @@ class Product
     {
         $content = '';
 
-        $content .= '<div class="datahub__main_content_column" id="datahub__main_content_column">';
+        $content .= '<div class="datahub-main-content-column" id="datahub-main-content-column">';
         $content .= '<h2 class="datahub__product_name">' . $this->product_name . '</h2>';
 
         $content .= $this->product_description;
-        $content .= '<div class="datahub__show_more_container" id="datahub__show_more_container">';
+        $content .= '<div class="datahub-show-more-container" id="datahub-show-more-container">';
         $content .= '<a id="datahub__read_more_link" onclick="open_description(); return false;" href="#">' . $this->translations_for_product($this->product_language, 'read_more') . '</a>';
         $content .= '</div>';
-        $content .= '</div>'; // .datahub__main_content_column
+        $content .= '</div>'; // .datahub-main-content-column
 
         $content = str_replace(" www.", " https://www.", $content);
 
@@ -188,35 +188,35 @@ class Product
     function render_sidebar()
     {
         $content = '';
-        $content .= '<div class="datahub__sidebar_column" id="datahub__sidebar">';
+        $content .= '<div class="datahub-sidebar-column" id="datahub__sidebar">';
 
         $logo = $this->logo->logo;
         if (!$logo) {
             $logo = plugin_dir_url(dirname(__FILE__)) . 'images/Visit_Hame_logo_header_medium.png';
         }
 
-        $content .= '<div class="datahub__logo"><img class="datahub__logo_image" src="' . $logo . '"></div>';
+        $content .= '<div class="datahub-logo"><img class="datahub-logo-image" src="' . $logo . '"></div>';
         $content .= '<ul>';
         $content .= '<h3 class="datahub__company_name">' . $this->business_name . '</h3>';
-        $content .= '<li class="datahub__sidebar_li">';
+        $content .= '<li class="datahub-sidebar-li">';
         $content .= '<span class="material-icons">email</span>';
         $content .= '<span title="Sähköposti"><a href="mailto:' . $this->contact_information[0]->email . '">' .  $this->contact_information[0]->email . '</a></span></li>';
 
-        $content .= '<li class="datahub__sidebar_li">';
+        $content .= '<li class="datahub-sidebar-li">';
         $content .= '<span class="material-icons">phone</span>';
         $content .= '<span title="Puhelin"><a href="tel:' . $this->contact_information[0]->phone . '">' . $this->contact_information[0]->phone . '</a></span></li>';
 
-        $content .= '<li class="datahub__sidebar_li">';
+        $content .= '<li class="datahub-sidebar-li">';
         $content .= '<span class="material-icons">web</span>';
         $url_data = parse_url($this->product_link);
         $content .= '<span><a href=' . $this->product_link . ' target="_blank">' .   $url_data['host']    . '</a></span></li>';
 
-        $content .= '<li class="datahub__sidebar_li">';
+        $content .= '<li class="datahub-sidebar-li">';
         $content .= '<span class="material-icons">place</span>';
         $address =  $this->product_address_street_name . ' ' . $this->product_address_city;
         $content .= '<span>' . $this->product_address_street_name . ' ' . $this->product_address_city . '</span></li>'; //.' '.$this->product_address_city;
 
-        $content .= '<li class="datahub__sidebar_li">';
+        $content .= '<li class="datahub-sidebar-li">';
         $content .= '<span class="material-icons">map</span>';
         $content .= '<span><a href="https://google.com/maps/?q=' . $address . '" target="blank">Google Maps</a></span></li>';
 
@@ -265,7 +265,7 @@ class Product
         // }
 
 
-        $content .= '<li class="datahub__sidebar_li">';
+        $content .= '<li class="datahub-sidebar-li">';
         $content .= '<span class="material-icons">event</span>';
         if (count($this->months) < 12) {
             $content .= '<span><table>';
@@ -305,7 +305,7 @@ class Product
         }
         $content .= '</li>';
         $content .= '</ul>';
-        $content .= '</div>'; // .datahub__sidebar_column
+        $content .= '</div>'; // .datahub-sidebar-column
 
         return $content;
     }
@@ -316,34 +316,34 @@ class Product
             return null;
         }
         $content = '';
-        $content .= '<div class="datahub__divider_content"><div class="datahub__divider_title">' . $this->translations_for_product($this->product_language, 'images') . '</div><div class="datahub__divider"></div></div>';
-        $content .= '<div class="datahub__media_column">';
-        $content .= '<div class="datahub__lightbox_row_content" id="datahub__lightbox_row_content">';
+        $content .= '<div class="datahub-divider-content"><div class="datahub-divider-title">' . $this->translations_for_product($this->product_language, 'images') . '</div><div class="datahub-divider"></div></div>';
+        $content .= '<div class="datahub-media-column">';
+        $content .= '<div class="datahub-lightbox-row-content" id="datahub-lightbox-row-content">';
         foreach ($this->images as $index => $image) {
-            $content .= sprintf('<img src="%s" onclick="datahubOpenModal();datahubCurrentSlide(%s)" class="datahub__carousel_images datahub__lightbox_thumbnail" data-copyright="&copy; ' . $image['copyright'] . '" alt="' . $image['alt_text'] . '">', $image['thumbnail_url'], $index + 1);
+            $content .= sprintf('<img src="%s" onclick="datahubOpenModal();datahubCurrentSlide(%s)" class="datahub-carousel-images datahub-lightbox-thumbnail" data-copyright="&copy; ' . $image['copyright'] . '" alt="' . $image['alt_text'] . '">', $image['thumbnail_url'], $index + 1);
         }
         if (count($this->images) > 1) {
-            $content .= '<div id="datahub__images_carousel_prev">&#10094;</div>';
-            $content .= '<div id="datahub__images_carousel_next">&#10095;</div>';
+            $content .= '<div id="datahub-images-carousel-prev">&#10094;</div>';
+            $content .= '<div id="datahub-images-carousel-next">&#10095;</div>';
         }
-        $content .= '</div>'; // datahub__lightbox_row_content
+        $content .= '</div>'; // datahub-lightbox-row-content
 
-        $content .= '<div id="datahub__lightbox_modal" class="datahub__lightbox_modal">';
-        $content .= '<div class="datahub__modal-content">';
-        $content .= '<span class="datahub__close cursor" onclick="datahubCloseModal()">&times;</span>';
+        $content .= '<div id="datahub-lightbox-modal" class="datahub-lightbox-modal">';
+        $content .= '<div class="datahub-modal-content">';
+        $content .= '<span class="datahub-close cursor" onclick="datahubCloseModal()">&times;</span>';
         foreach ($this->images as $index => $image) {
-            $content .= '<div class="datahub__lightbox_slides">';
-            $content .= sprintf('<div class="datahub__numbertext">%s/%s</div>', $index + 1, count($this->images));
+            $content .= '<div class="datahub-lightbox-slides">';
+            $content .= sprintf('<div class="datahub-numbertext">%s/%s</div>', $index + 1, count($this->images));
             $content .= '<img id="full_image_' . ($index + 1) . '" data-image-url="' . $image['large_url'] . '" src="" title="' . $image['alt_text'] . '" style="width: 100%" ' . 'data-copyright="&copy; ' . $image['copyright']   . '" alt="' . $image['alt_text'] . '">';
-            $content .= '</div>';  // datahub__lightbox_slides
+            $content .= '</div>';  // datahub-lightbox-slides
         }
 
-        $content .= '<a class="datahub__prev" onclick="datahubPlusSlides(-1)">&#10094;</a>';
-        $content .= '<a class="datahub__next" onclick="datahubPlusSlides(1)">&#10095;</a>';
+        $content .= '<a class="datahub-prev" onclick="datahubPlusSlides(-1)">&#10094;</a>';
+        $content .= '<a class="datahub-next" onclick="datahubPlusSlides(1)">&#10095;</a>';
 
-        $content .= '</div>'; // datahub__modal-content
-        $content .= '</div>'; // datahub__lightbox_modal
-        $content .= '</div>'; // datahub__media_column
+        $content .= '</div>'; // datahub-modal-content
+        $content .= '</div>'; // datahub-lightbox-modal
+        $content .= '</div>'; // datahub-media-column
 
         return $content;
     }
@@ -355,23 +355,23 @@ class Product
         if ($this->videos == null) {
             return null;
         }
-        $content .= '<div class="datahub__divider_content"><div class="datahub__divider_title">' . $this->translations_for_product($this->product_language, 'videos') . '</div><div class="datahub__divider"></div></div>';
-        $content .= '<div class="datahub__media_column">';
+        $content .= '<div class="datahub-divider-content"><div class="datahub-divider-title">' . $this->translations_for_product($this->product_language, 'videos') . '</div><div class="datahub-divider"></div></div>';
+        $content .= '<div class="datahub-media-column">';
 
         if ($this->videos != null) {
             $content .= '<div class="datahub__video_row">';
-            $content .= '<div class="datahub__video_links">';
+            $content .= '<div class="datahub-video-links">';
             foreach ($this->videos as $video) {
                 if ($video != null) {
                     $url_data = parse_url($video->video_url);
-                    $content .= sprintf('<div class="datahub__video_link"><span class="datahub__icon material-icons">open_in_new</span><a href="%s" title="%s">%s - %s</a></div><br>', $video->video_url, $video->title, $video->title, $url_data['host']);
+                    $content .= sprintf('<div class="datahub-video-link"><span class="datahub-icon material-icons">open_in_new</span><a href="%s" title="%s">%s - %s</a></div><br>', $video->video_url, $video->title, $video->title, $url_data['host']);
                 }
             }
-            $content .= '</div>'; // .datahub__video_links
+            $content .= '</div>'; // .datahub-video-links
             $content .= '</div>'; // .datahub__video_row
         }
 
-        $content .= '</div>'; // datahub__media_column
+        $content .= '</div>'; // datahub-media-column
 
         return $content;
     }

@@ -95,10 +95,10 @@ get_header(); ?>
     <?php echo $product->render_title() ?>
   </div> -->
   <div id="datahub__main_content">
-    <div class="datahub__row">
+    <div class="datahub-row">
       <?php echo $product->render_title() ?>
     </div>
-    <div class="datahub__row">
+    <div class="datahub-row">
 
       <?php
       echo wpautop($product->render_main_content());
@@ -107,17 +107,17 @@ get_header(); ?>
       <?php
       echo $product->render_sidebar();
       ?>
-    </div><!-- .datahub__row -->
-    <div class="datahub__row_media">
+    </div><!-- .datahub-row -->
+    <div class="datahub-row-media">
       <?php
       echo $product->render_images();
       ?>
-    </div><!-- .datahub__row -->
-    <div class="datahub__row_media">
+    </div><!-- .datahub-row -->
+    <div class="datahub-row-media">
       <?php
       echo $product->render_videos();
       ?>
-    </div><!-- .datahub__row -->
+    </div><!-- .datahub-row -->
   </div><!-- #datahub__main_content -->
 </div><!-- #datahub__content -->
 
@@ -127,12 +127,12 @@ get_header(); ?>
 
 <script>
   function datahubOpenModal() {
-    document.getElementById("datahub__lightbox_modal").style.display = "flex";
+    document.getElementById("datahub-lightbox-modal").style.display = "flex";
   }
 
   // Close the Modal
   function datahubCloseModal() {
-    document.getElementById("datahub__lightbox_modal").style.display = "none";
+    document.getElementById("datahub-lightbox-modal").style.display = "none";
   }
 
   let slideIndex = 1;
@@ -150,7 +150,7 @@ get_header(); ?>
 
   function datahubShowSlides(n) {
     let i;
-    let slides = document.getElementsByClassName("datahub__lightbox_slides");
+    let slides = document.getElementsByClassName("datahub-lightbox-slides");
 
     if (n > slides.length) {
       slideIndex = 1
@@ -169,16 +169,16 @@ get_header(); ?>
     slides[slideIndex - 1].style.display = "block";
   }
 
-  document.querySelector('#datahub__images_carousel_prev').addEventListener('click', function() {
-    document.getElementById("datahub__lightbox_row_content").scrollBy({
+  document.querySelector('#datahub-images-carousel-prev').addEventListener('click', function() {
+    document.getElementById("datahub-lightbox-row-content").scrollBy({
       left: -100,
       top: 0,
       behavior: 'smooth'
     })
   });
 
-  document.querySelector('#datahub__images_carousel_next').addEventListener('click', function() {
-    document.getElementById("datahub__lightbox_row_content").scrollBy({
+  document.querySelector('#datahub-images-carousel-next').addEventListener('click', function() {
+    document.getElementById("datahub-lightbox-row-content").scrollBy({
       left: 100,
       top: 0,
       behavior: 'smooth'
@@ -186,11 +186,11 @@ get_header(); ?>
   });
 
   if (window.innerWidth < 700) {
-    let cont = document.getElementById("datahub__main_content_column");
+    let cont = document.getElementById("datahub-main-content-column");
     let p_elements = cont.querySelectorAll("p")
 
     if (p_elements.length > 1) {
-      document.getElementById("datahub__show_more_container").style.display = "block";
+      document.getElementById("datahub-show-more-container").style.display = "block";
       for (i = 0; i < p_elements.length; i++) {
         if (i > 0) {
           p_elements[i].style.display = "none";
@@ -199,9 +199,9 @@ get_header(); ?>
     }
 
     function open_description() {
-      let cont = document.getElementById("datahub__main_content_column");
+      let cont = document.getElementById("datahub-main-content-column");
       let p_elements = cont.querySelectorAll("p")
-      document.getElementById("datahub__show_more_container").style.display = "none";
+      document.getElementById("datahub-show-more-container").style.display = "none";
 
       for (i = 0; i < p_elements.length; i++) {
         if (i > 0) {
