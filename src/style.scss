@@ -69,6 +69,7 @@
 	width: 530px; // calc(50% - 20px)
 	height: 220px;
 	background-size: cover;
+	background-position: 50%;
 	margin: 10px;
 	transition: 0.5s;
 	-webkit-transition: all 0.5s;
@@ -230,12 +231,12 @@ body .datahub-container-card p {
 // 		display: none;
 // 	}
 // }
-// /* Large devices (laptops/desktops, 992px and up) */
-// @media only screen and (min-width: 992px) {
-// 	.datahub-link-text {
-// 		display: none;
-// 	}
-// }
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.datahub-title-image {
+		min-height: 400px;
+	}
+}
 // /* Extra large devices (large laptops and desktops, 1200px and up) */
 // @media only screen and (min-width: 1200px) {
 // 	.datahub-link-text {
