@@ -305,7 +305,7 @@ class VisitHameDataHub
             delete_option('access_token');
 
             $access_token = $graphQL->get_access_token($datahub_options['datahub_client_secret'], $datahub_options['datahub_username'], $datahub_options['datahub_password']);
-
+            
             if ($access_token == false) {
                 return "Can't get access token";
             }
@@ -315,6 +315,10 @@ class VisitHameDataHub
             if (is_object($products)) {
                 $database->insert_or_update_products($products->data->product);
             }
+        }
+
+        if ($attributes['municipalities'] === 'No selection' || $attributes['categories'] === 'No selection') {
+            return '<p>No filters have been added. Please add at least one municipality and one category to show products.</p>';
         }
 
         $products = $database->get_products_list($attributes['categories'], $attributes['municipalities'], $attributes['language']);
