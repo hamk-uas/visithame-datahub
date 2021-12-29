@@ -2,7 +2,7 @@
 Contributors:      VisitHäme
 Tags:              block
 Tested up to:      5.8.0
-Stable tag:        0.4.0
+Stable tag:        1.0.0
 License:           MIT License
 License URI:       https://opensource.org/licenses/MIT
 
@@ -13,7 +13,7 @@ Query products from DataHub
 Plugin shows products from the DataHub API. Products area is limited to Tavastia region (Kanta-Häme: Hämeenlinna region, Forssa region and Riihimäki region). 
 Showing the products on the page can be limited to current municipalities, such as Hämeenlinna, Jokioinen etc. 
 
-Plugin works by fetching the tags and products from DataHub. New tags and products are fetched when a page containing the plugin is loaded and the last update was more than a month ago. 
+Plugin works by fetching the tags and products from DataHub. New tags and products are fetched when a page containing the plugin is loaded and the last update was more than a week ago. 
 
 With the initial installation, some usable tags are inserted to the database. 
 

@@ -5,7 +5,7 @@
  * Description:       Query products from DataHub
  * Requires at least: 5.8
  * Requires PHP:      7.0
- * Version:           0.5.0
+ * Version:           1.0.0
  * Author:            VisitHäme
  * License:           MIT License
  * License URI:       https://opensource.org/licenses/MIT
@@ -297,7 +297,7 @@ class VisitHameDataHub
     ");
         $products = null;
         // 60 * 60 * 24 * 7 604800
-        if (empty($result) || !property_exists($result[0], 'target_field') || (strtotime($date) - strtotime($result[0]->updated_at) > 86400)) {
+        if (empty($result) || !property_exists($result[0], 'target_field') || (strtotime($date) - strtotime($result[0]->updated_at) > 604800)) {
             $datahub_options = $database->get_datahub_options();
 
             delete_option('access_token');
