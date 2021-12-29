@@ -16,7 +16,7 @@ export const MunicipalityCheckboxControl = ( props ) => {
 	return (
 		<>
 			<TextControl
-				label={ __( 'Search', 'visithame-datahub' ) }
+				label={"Search"}
 				value={ searchValue }
 				onChange={ ( value ) => setSearchValue( value ) }
 			/>

@@ -5,12 +5,10 @@
  * Description:       Query products from DataHub
  * Requires at least: 5.8
  * Requires PHP:      7.0
- * Version:           0.4.0
+ * Version:           0.5.0
  * Author:            VisitHäme
  * License:           MIT License
  * License URI:       https://opensource.org/licenses/MIT
- * Text Domain:       visithame-datahub
- * Domain Path:       /languages
  *
  * @package           datahub
  */

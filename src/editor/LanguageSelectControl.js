@@ -12,7 +12,7 @@ export const LanguageSelectControl = ( props ) => {
 		<>
 			<SelectControl
 				className="select-control"
-				label={ __( 'Language', 'visithame-datahub' ) }
+				label={"Language"}
 				value={ value }
 				onChange={ onChange }
 				options={ languages }

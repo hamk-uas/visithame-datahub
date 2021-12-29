@@ -18,7 +18,7 @@ export const TagCheckboxControl = ( props ) => {
 	return (
 		<>
 			<TextControl
-				label={ __( 'Search', 'visithame-datahub' ) }
+				label={"Search"}
 				value={ category }
 				onChange={ ( value ) => setCategory( value ) }
 			/>

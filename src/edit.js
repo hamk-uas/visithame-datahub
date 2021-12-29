@@ -47,10 +47,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		{ value: 'zh', label: 'Kiina', checked: false },
 	];
 	const targetGroupsList = [
-		{ value: 'b2b', label: 'B2B', checked: false },
-		{ value: 'b2c', label: 'B2C', checked: false },
-		{ value: 'group', label: 'Group', checked: false },
-		{ value: 'individual', label: 'Individual', checked: false },
+		{ value: 'b2b', label: 'List products with B2B', checked: false }
 	];
 
 	const [ tags, setTags ] = useState( searchParams.tags );
@@ -192,7 +189,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<div id="visithame-datahub-controls">
 						<fieldset>
 							<legend className="blocks-base-control__label">
-								{ __( 'Categories', 'visithame-datahub' ) }
+								{"Categories"}
 							</legend>
 							<TagCheckboxControl
 								tags={ tags }
@@ -201,7 +198,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						</fieldset>
 						<fieldset>
 							<legend className="blocks-base-control__label">
-								{ __( 'Municipalities', 'visithame-datahub' ) }
+								{"Municipalities"}
 							</legend>
 							<MunicipalityCheckboxControl
 								municipalities={ municipalities }
@@ -210,7 +207,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						</fieldset>
 						<fieldset>
 							<legend className="blocks-base-control__label">
-								{ __( 'Language', 'visithame-datahub' ) }
+								{"Language"}
 							</legend>
 							<LanguageSelectControl
 								languages={ language }
@@ -232,10 +229,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				</InspectorControls>
 			}
 			<div>
-				{ __(
-					'DataHub – hello from the editor!',
-					'visithame-datahub'
-				) }
+				{"DataHub - Select filters from the block settings"}
 				<br />
 			</div>
 		</div>
