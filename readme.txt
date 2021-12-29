@@ -10,6 +10,8 @@ Query products from DataHub
 
 == Description ==
 
+This plugin is a developed for the Gutenberg editor.
+
 Plugin shows products from the DataHub API. Products area is limited to Tavastia region (Kanta-Häme: Hämeenlinna region, Forssa region and Riihimäki region). 
 Showing the products on the page can be limited to current municipalities, such as Hämeenlinna, Jokioinen etc. 
 
