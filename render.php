@@ -4,11 +4,22 @@ function datahub_render_card($product, $language)
 {
     $content = '';
 
-    $url = $product->thumbnail_url;
+    $url = $product->large_url;
     // $url = $cover_photo;
     // $url = $product->large_url;
     $url = str_replace('(', '%28', $url);
     $url = str_replace(')', '%29', $url);
+
+    // $url_components = parse_url($url);
+
+    $re = '/\?s=\d*/';
+    // $str = 'https://cdn-datahub.visitfinland.com/images/f794d5f0-d346-11eb-a8b5-0d99be0b7375-Kahvila%20aamuauringossa%20leikattu.jpg?s=1920';
+    $subst = '?s=480';
+
+    $url = preg_replace($re, $subst, $url, 1);
+
+    // echo "The result of the substitution is ".$result;
+
 
     $content .= '<div class="datahub-container-card" style="background-image: url(' . $url . ');" ' . 'data-copyright="&copy; ' . $product->copyright . '" alt="' . $product->alt_text . '">';
     $content .= sprintf("<a href='" . site_url('', 'relative') . "/%s/%s/' target='_blank'>", get_url($product, $language), $language);

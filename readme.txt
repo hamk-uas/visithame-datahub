@@ -21,7 +21,7 @@ With the initial installation, some usable tags are inserted to the database.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/visithame-datahub` directory, or install the plugin through the WordPress plugins screen directly.
+1. Build and upload the plugin files to the `/wp-content/plugins/visithame-datahub` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Add DataHub Gutenberg block to a page with selected filters. 
 

@@ -24,7 +24,7 @@ class DataHubDatabase
                 ));
             }
         }
-        $tags_done = $this->insert_or_update('visithame_datahub_tags', '(%s)', $table_editor_tags);
+        $tags_done = $this->insert_or_update('visithame_tags', '(%s)', $table_editor_tags);
 
         $date = date('Y-m-d h:i:s', time());
         $done_up = $this->insert_or_update_time_updated('editor', $date);
@@ -35,7 +35,7 @@ class DataHubDatabase
     {
         global $wpdb;
         global $jal_db_version;
-        $table_name = $wpdb->prefix . 'visithame_datahub_municipalities';
+        $table_name = $wpdb->prefix . 'visithame_municipalities';
 
         $sql = "INSERT INTO $table_name (city, city_code) VALUES (%s, %s) ON DUPLICATE KEY UPDATE city = city";
         $sql = $wpdb->prepare($sql, $city, $city_code);
@@ -50,7 +50,7 @@ class DataHubDatabase
     {
         global $wpdb;
         global $jal_db_version;
-        $table_name = $wpdb->prefix . 'visithame_datahub_updates';
+        $table_name = $wpdb->prefix . 'visithame_updates';
 
         $sql = "INSERT INTO $table_name (target_field, updated_at) VALUES (%s, %s) ON DUPLICATE KEY UPDATE updated_at = %s";
         $sql = $wpdb->prepare($sql, $id, $updated_at, $updated_at);
@@ -64,7 +64,7 @@ class DataHubDatabase
     function get_tags()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'visithame_datahub_tags';
+        $table_name = $wpdb->prefix . 'visithame_tags';
         $tags = $wpdb->get_results("
     SELECT *
     FROM $table_name
@@ -80,7 +80,7 @@ class DataHubDatabase
     function get_municipalities()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'visithame_datahub_municipalities';
+        $table_name = $wpdb->prefix . 'visithame_municipalities';
         $municipalities = $wpdb->get_results("
     SELECT city, city_code
     FROM $table_name
@@ -95,7 +95,7 @@ class DataHubDatabase
 
     function get_municipality($city_code) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'visithame_datahub_municipalities';
+        $table_name = $wpdb->prefix . 'visithame_municipalities';
         $municipality = $wpdb->get_results("
         SELECT city
         FROM $table_name
@@ -233,6 +233,9 @@ class DataHubDatabase
             ));
             foreach ($product->postalAddresses as $postal_address) {
                 $loc = str_replace(",", " ", substr($postal_address->location, 1, -1));
+                if (strlen($loc) <= 6 || $loc == null) {
+                    $loc = "0.00000 0.00000";
+                }
                 $loc = sprintf("POINT(%s)", $loc);
                 array_push($table_postal_address, array(
                     'product_id' => $product->id,
@@ -315,24 +318,25 @@ class DataHubDatabase
         }
 
         global $wpdb;
+
         $table_prefix = $wpdb->prefix;
         $tables = array(
-            $table_prefix . 'visithame_datahub_social_media_link',
-            $table_prefix . 'visithame_datahub_opening_hours',
-            $table_prefix . 'visithame_datahub_postal_area',
-            $table_prefix . 'visithame_datahub_postal_address',
-            $table_prefix . 'visithame_datahub_product_availability',
-            $table_prefix . 'visithame_datahub_product_available_months',
-            $table_prefix . 'visithame_datahub_product_image',
-            $table_prefix . 'visithame_datahub_product_information',
-            $table_prefix . 'visithame_datahub_product_pricing',
-            $table_prefix . 'visithame_datahub_product_tag',
-            $table_prefix . 'visithame_datahub_product_video',
-            $table_prefix . 'visithame_datahub_product_pricing',
-            $table_prefix . 'visithame_datahub_contact_details',
-            $table_prefix . 'visithame_datahub_company',
-            $table_prefix . 'visithame_datahub_product',
-            $table_prefix . 'visithame_datahub_target_group'
+            $table_prefix . 'visithame_social_media_link',
+            $table_prefix . 'visithame_opening_hours',
+            $table_prefix . 'visithame_postal_area',
+            $table_prefix . 'visithame_postal_address',
+            $table_prefix . 'visithame_product_availability',
+            $table_prefix . 'visithame_product_available_months',
+            $table_prefix . 'visithame_product_image',
+            $table_prefix . 'visithame_product_information',
+            $table_prefix . 'visithame_product_pricing',
+            $table_prefix . 'visithame_product_tag',
+            $table_prefix . 'visithame_product_video',
+            $table_prefix . 'visithame_product_pricing',
+            $table_prefix . 'visithame_contact_details',
+            $table_prefix . 'visithame_company',
+            $table_prefix . 'visithame_product',
+            $table_prefix . 'visithame_target_group'
         );
 
         foreach ($tables as $table) {
@@ -340,20 +344,20 @@ class DataHubDatabase
             $wpdb->query($sql);
         }
 
-        $done_p = $this->insert_or_update('visithame_datahub_product', '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', $table_product);
-        $done_c = $this->insert_or_update('visithame_datahub_company', '(%s, %s, %s, %s, %s, %s, %s, %s)', $table_company);
-        $done_co = $this->insert_or_update('visithame_datahub_contact_details', '(%s, %s, %s, %s, %s)', $table_contact);
-        $done_im = $this->insert_or_update('visithame_datahub_product_image', '(%s, %s, %s, %s, %s, %s, %s)', $table_image);
-        $done_in = $this->insert_or_update('visithame_datahub_product_information', '(%s, %s, %s, %s, %s, %s, %s)', $table_info);
-        $done_so = $this->insert_or_update('visithame_datahub_social_media_link', '(%s, %s, %s)', $table_social);
-        $done_pa = $this->insert_or_update('visithame_datahub_postal_address', '(%s, %s, %s, %s, %s, ST_PointFromText(%s), %s, %s)', $table_postal_address);
-        $done_paa = $this->insert_or_update('visithame_datahub_postal_area', '(%s, %s, %s)', $table_postal_area);
-        $done_v = $this->insert_or_update('visithame_datahub_product_video', '(%s, %s, %s)', $table_video);
-        $done_p = $this->insert_or_update('visithame_datahub_product_pricing', '(%s, %s, %s, %s)', $table_pricing);
-        $done_t = $this->insert_or_update('visithame_datahub_product_tag', '(%s, %s, %s)', $table_tag);
-        $done_a = $this->insert_or_update('visithame_datahub_product_available_months', '(%s, %s, %s)', $table_available);
-        $done_o = $this->insert_or_update('visithame_datahub_opening_hours', '(%s, %s, %s, %s, %s)', $table_opening);
-        $done_ta = $this->insert_or_update('visithame_datahub_target_group', '(%s, %s, %s)', $table_targets);
+        $done_p = $this->insert_or_update('visithame_product', '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', $table_product);
+        $done_c = $this->insert_or_update('visithame_company', '(%s, %s, %s, %s, %s, %s, %s, %s)', $table_company);
+        $done_co = $this->insert_or_update('visithame_contact_details', '(%s, %s, %s, %s, %s)', $table_contact);
+        $done_im = $this->insert_or_update('visithame_product_image', '(%s, %s, %s, %s, %s, %s, %s)', $table_image);
+        $done_in = $this->insert_or_update('visithame_product_information', '(%s, %s, %s, %s, %s, %s, %s)', $table_info);
+        $done_so = $this->insert_or_update('visithame_social_media_link', '(%s, %s, %s)', $table_social);
+        $done_pa = $this->insert_or_update('visithame_postal_address', '(%s, %s, %s, %s, %s, ST_PointFromText(%s), %s, %s)', $table_postal_address);
+        $done_paa = $this->insert_or_update('visithame_postal_area', '(%s, %s, %s)', $table_postal_area);
+        $done_v = $this->insert_or_update('visithame_product_video', '(%s, %s, %s)', $table_video);
+        $done_p = $this->insert_or_update('visithame_product_pricing', '(%s, %s, %s, %s)', $table_pricing);
+        $done_t = $this->insert_or_update('visithame_product_tag', '(%s, %s, %s)', $table_tag);
+        $done_a = $this->insert_or_update('visithame_product_available_months', '(%s, %s, %s)', $table_available);
+        $done_o = $this->insert_or_update('visithame_opening_hours', '(%s, %s, %s, %s, %s)', $table_opening);
+        $done_ta = $this->insert_or_update('visithame_target_group', '(%s, %s, %s)', $table_targets);
 
         $date = date('Y-m-d h:i:s', time());
         $done_up = $this->insert_or_update_time_updated('products', $date);
@@ -403,7 +407,7 @@ class DataHubDatabase
     {
         global $wpdb;
         global $jal_db_version;
-        $table_name = $wpdb->prefix . 'visithame_datahub_translations';
+        $table_name = $wpdb->prefix . 'visithame_translations';
 
         $sql = "INSERT INTO $table_name (page_id) VALUES (%s) ON DUPLICATE KEY UPDATE page_id = VALUES(page_id)";
         // var_dump($sql); // debug
@@ -456,21 +460,21 @@ class DataHubDatabase
     function get_products_list($categories, $municipalities, $language)
     {
         global $wpdb;
-        $table_product = $wpdb->prefix . 'visithame_datahub_product';
-        $table_postal_address = $wpdb->prefix . 'visithame_datahub_postal_address';
-        $table_postal_area = $wpdb->prefix . 'visithame_datahub_postal_area';
-        $table_company = $wpdb->prefix . 'visithame_datahub_company';
-        $table_information = $wpdb->prefix . 'visithame_datahub_product_information';
-        $table_image = $wpdb->prefix . 'visithame_datahub_product_image';
-        $table_tag = $wpdb->prefix . 'visithame_datahub_product_tag';
-        $table_target = $wpdb->prefix . 'visithame_datahub_target_group';
+        $table_product = $wpdb->prefix . 'visithame_product';
+        $table_postal_address = $wpdb->prefix . 'visithame_postal_address';
+        $table_postal_area = $wpdb->prefix . 'visithame_postal_area';
+        $table_company = $wpdb->prefix . 'visithame_company';
+        $table_information = $wpdb->prefix . 'visithame_product_information';
+        $table_image = $wpdb->prefix . 'visithame_product_image';
+        $table_tag = $wpdb->prefix . 'visithame_product_tag';
+        $table_target = $wpdb->prefix . 'visithame_target_group';
 
         $tags = '';
 
         $sql = "";
         $sql .= "SELECT Product.product_id, Information.description, Area.city_code, Information.name, Product.product_url_fi, Product.product_url_en, Product.product_url_de, Product.product_url_ru, Product.product_url_sv, Product.product_url_zh, Product.product_url_ja, ";
         // $sql .= "GROUP_CONCAT(DISTINCT(CONCAT_WS(';', Images.large_url, Images.cover_photo, Images.copyright, Images.alt_text, Images.orientation, Images.thumbnail_url)) SEPARATOR ';:;') AS ImageData, ";
-        $sql .= "Images.thumbnail_url, Images.copyright, Images.alt_text, ";
+        $sql .= "Images.large_url, Images.copyright, Images.alt_text, ";
         $sql .= "GROUP_CONCAT(DISTINCT(CONCAT_WS(';', Target.target_group))) AS TargetData ";
         $sql .= "FROM $table_product AS Product ";
         $sql .= "LEFT JOIN $table_image Images ON Product.product_id = Images.product_id ";
@@ -507,20 +511,20 @@ class DataHubDatabase
     function datahub_get_product_details_from_database($id, $language)
     {
         global $wpdb;
-        $table_product = $wpdb->prefix . 'visithame_datahub_product';
-        $table_postal_address = $wpdb->prefix . 'visithame_datahub_postal_address';
-        $table_postal_area = $wpdb->prefix . 'visithame_datahub_postal_area';
-        $table_company = $wpdb->prefix . 'visithame_datahub_company';
-        $table_information = $wpdb->prefix . 'visithame_datahub_product_information';
-        $table_image = $wpdb->prefix . 'visithame_datahub_product_image';
-        $table_tag = $wpdb->prefix . 'visithame_datahub_product_tag';
-        $table_pricing = $wpdb->prefix . 'visithame_datahub_product_pricing';
-        $table_opening = $wpdb->prefix . 'visithame_datahub_opening_hours';
-        $table_social = $wpdb->prefix . 'visithame_datahub_social_media_link';
-        $table_video = $wpdb->prefix . 'visithame_datahub_product_video';
-        $table_contact = $wpdb->prefix . 'visithame_datahub_contact_details';
-        $table_available = $wpdb->prefix . 'visithame_datahub_product_available_months';
-        $table_target = $wpdb->prefix . 'visithame_datahub_target_group';
+        $table_product = $wpdb->prefix . 'visithame_product';
+        $table_postal_address = $wpdb->prefix . 'visithame_postal_address';
+        $table_postal_area = $wpdb->prefix . 'visithame_postal_area';
+        $table_company = $wpdb->prefix . 'visithame_company';
+        $table_information = $wpdb->prefix . 'visithame_product_information';
+        $table_image = $wpdb->prefix . 'visithame_product_image';
+        $table_tag = $wpdb->prefix . 'visithame_product_tag';
+        $table_pricing = $wpdb->prefix . 'visithame_product_pricing';
+        $table_opening = $wpdb->prefix . 'visithame_opening_hours';
+        $table_social = $wpdb->prefix . 'visithame_social_media_link';
+        $table_video = $wpdb->prefix . 'visithame_product_video';
+        $table_contact = $wpdb->prefix . 'visithame_contact_details';
+        $table_available = $wpdb->prefix . 'visithame_product_available_months';
+        $table_target = $wpdb->prefix . 'visithame_target_group';
 
         $sql = "";
         $sql .= "SELECT DISTINCT $table_product.company_id, $table_product.product_id, $table_product.accessible_product, $table_product.product_type,  $table_product.product_url_fi,  $table_product.product_url_en,  $table_product.product_url_de,  $table_product.product_url_ru,  $table_product.product_url_sv,  $table_product.product_url_zh,  $table_product.product_url_ja, ";
@@ -608,7 +612,7 @@ class DataHubDatabase
     {
         global $wpdb;
         global $jal_db_version;
-        $table_name = $wpdb->prefix . 'visithame_datahub_translations';
+        $table_name = $wpdb->prefix . 'visithame_translations';
 
         $sql = "SELECT page_id FROM $table_name ";
 
@@ -624,7 +628,7 @@ class DataHubDatabase
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_translations';
+        $table_name = $wpdb->prefix . 'visithame_translations';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
@@ -636,7 +640,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_tags';
+        $table_name = $wpdb->prefix . 'visithame_tags';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
@@ -648,7 +652,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_municipalities';
+        $table_name = $wpdb->prefix . 'visithame_municipalities';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
@@ -661,7 +665,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_updates';
+        $table_name = $wpdb->prefix . 'visithame_updates';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
@@ -672,7 +676,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product';
+        $table_name = $wpdb->prefix . 'visithame_product';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -702,7 +706,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_company';
+        $table_name = $wpdb->prefix . 'visithame_company';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -720,7 +724,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_contact_details';
+        $table_name = $wpdb->prefix . 'visithame_contact_details';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -735,7 +739,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product_video';
+        $table_name = $wpdb->prefix . 'visithame_product_video';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -748,7 +752,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product_tag';
+        $table_name = $wpdb->prefix . 'visithame_product_tag';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -761,7 +765,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product_pricing';
+        $table_name = $wpdb->prefix . 'visithame_product_pricing';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -775,7 +779,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product_information';
+        $table_name = $wpdb->prefix . 'visithame_product_information';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -792,7 +796,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product_image';
+        $table_name = $wpdb->prefix . 'visithame_product_image';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -809,7 +813,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product_available_months';
+        $table_name = $wpdb->prefix . 'visithame_product_available_months';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -822,7 +826,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_product_availability';
+        $table_name = $wpdb->prefix . 'visithame_product_availability';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -839,7 +843,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_postal_address';
+        $table_name = $wpdb->prefix . 'visithame_postal_address';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -857,7 +861,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_postal_area';
+        $table_name = $wpdb->prefix . 'visithame_postal_area';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -869,7 +873,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_opening_hours';
+        $table_name = $wpdb->prefix . 'visithame_opening_hours';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -884,7 +888,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_social_media_link';
+        $table_name = $wpdb->prefix . 'visithame_social_media_link';
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
         company_id VARCHAR(64) NOT NULL,
@@ -896,7 +900,7 @@ class DataHubDatabase
 
         dbDelta($sql);
 
-        $table_name = $wpdb->prefix . 'visithame_datahub_target_group';
+        $table_name = $wpdb->prefix . 'visithame_target_group';
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
         product_id VARCHAR(64) DEFAULT '' NOT NULL,
@@ -914,7 +918,7 @@ class DataHubDatabase
     function add_initial_values()
     {
         global $wpdb;
-        $table = $wpdb->prefix . 'visithame_datahub_tags';
+        $table = $wpdb->prefix . 'visithame_tags';
         $wpdb->query("INSERT INTO $table
             (tag)
             VALUES
@@ -940,7 +944,7 @@ class DataHubDatabase
             ('yoga_meditation')
             ");
 
-        $table = $wpdb->prefix . 'visithame_datahub_municipalities';
+        $table = $wpdb->prefix . 'visithame_municipalities';
         $wpdb->query("INSERT INTO $table
         (city, city_code)
         VALUES
